@@ -50,13 +50,16 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
     m_paintArea = ui->paintArea;
     m_fileName = DEFAULT_FILE_NAME;
     m_layersList = new LayersList;
-	m_dock.setVisible(false);
+    m_dock.setVisible(false);
     setStatusBar();
     setToolBox();
     setDock();
 
+    m_strokeColorLabel.setToolTip(tr("Stroke color"));
+    m_fillColorLabel.setToolTip(tr("Fill color"));  
+
     //connect(m_paintArea,SIGNAL(haveUpdate()),SLOT(on_haveUpdate()));
-    
+
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),SLOT(on_haveUpdate()));
     timer->start(500);
@@ -197,9 +200,9 @@ void MainWindow::setStatusBar()
     checkButton->setChecked(m_paintArea->antialiasingEnabled());
     connect(checkButton, &QCheckBox::toggled, m_paintArea, &PaintArea::setAntialiasingEnabled);
     ui->statusBar->addPermanentWidget(m_widthButton);
-    ui->statusBar->addPermanentWidget(new QLabel(QStringLiteral("Stroke color:")));
+    //ui->statusBar->addPermanentWidget(new QLabel(QStringLiteral("Stroke color:")));
     ui->statusBar->addPermanentWidget(&m_strokeColorLabel);
-    ui->statusBar->addPermanentWidget(new QLabel(QStringLiteral("Fill color:")));
+    //ui->statusBar->addPermanentWidget(new QLabel(QStringLiteral("Fill color:")));
     ui->statusBar->addPermanentWidget(&m_fillColorLabel);
     ui->statusBar->addPermanentWidget(new QLabel(QStringLiteral("Tool:")));
     ui->statusBar->addPermanentWidget(&m_toolbox);

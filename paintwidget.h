@@ -45,8 +45,7 @@ signals:
     void mousePress(const QPoint&, QImage*);
     void mouseMove(const QPoint&, QImage*);
     void mouseRelease(const QPoint&, QImage*);
-    void haveUpdate();
-    
+
 private:
     QBrush m_checkeredBackground;
 

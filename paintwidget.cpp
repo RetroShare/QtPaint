@@ -52,7 +52,6 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton) {
         emit mouseRelease(event->pos(), m_layers[m_selectedLayer].image());
     }
-    emit haveUpdate();
 }
 
 void PaintWidget::paintEvent(QPaintEvent* event)
