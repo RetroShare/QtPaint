@@ -56,7 +56,10 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
     setDock();
 
     //connect(m_paintArea,SIGNAL(haveUpdate()),SLOT(on_haveUpdate()));
-	ui->progressBar->hide();
+    
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),SLOT(on_haveUpdate()));
+    timer->start(500);
 
     chatType = chatWidget->chatType();
 

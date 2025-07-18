@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <QLabel>
 #include <QComboBox>
 #include <QDockWidget>
+#include <QTimer>
+
 #include "paintarea.h"
 #include "colorlabel.h"
 #include "widthbutton.h"
@@ -96,6 +98,8 @@ private:
     ChatWidget::ChatType chatType;
     ChatWidget *chatWidget;
     int MAX_LOBBY_MSG_SIZE;
+
+    QTimer *timer;
 
     Ui::MainWindow *ui;
 };
