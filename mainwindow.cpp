@@ -60,9 +60,9 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
 
     //connect(m_paintArea,SIGNAL(haveUpdate()),SLOT(on_haveUpdate()));
 
-    timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),SLOT(on_haveUpdate()));
-    timer->start(500);
+    //timer = new QTimer(this);
+    //connect(timer,SIGNAL(timeout()),SLOT(on_haveUpdate()));
+    //timer->start(500);
 
     chatType = chatWidget->chatType();
 
