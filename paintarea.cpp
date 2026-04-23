@@ -112,6 +112,9 @@ void PaintArea::mouseRelease(const QPoint& pos, QImage* layer)
     std::shared_ptr<PaintEvent> event (fillPaintEvent(adjustedPos(pos),layer));
     m_tools[m_selectedTool]->onMouseRelease(event.get());
     m_paintWidget->repaint();
+
+    // Trigger the update!
+    emit contentChanged();
 }
 
 QImage PaintArea::saveImage()
@@ -234,6 +237,9 @@ void PaintArea::transform(int type)
         break;
     }
     m_paintWidget->repaint();
+
+    // Trigger update after rotation/flip
+    emit contentChanged();
 }
 
 QImage PaintArea::getImage(){

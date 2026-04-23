@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "zoomslider.h"
 
 #include <retroshare/rspeers.h>
-#include <retroshare/rsmsgs.h>
+#include <retroshare/rsChats.h>
 #include <retroshare/rsidentity.h>
 #include <unistd.h>
 #include <util/imageutil.h>
@@ -58,11 +58,8 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
     m_strokeColorLabel.setToolTip(tr("Stroke color"));
     m_fillColorLabel.setToolTip(tr("Fill color"));  
 
-    //connect(m_paintArea,SIGNAL(haveUpdate()),SLOT(on_haveUpdate()));
 
-    //timer = new QTimer(this);
-    //connect(timer,SIGNAL(timeout()),SLOT(on_haveUpdate()));
-    //timer->start(500);
+	connect(m_paintArea, &PaintArea::contentChanged, this, &MainWindow::on_haveUpdate);
 
     chatType = chatWidget->chatType();
 
@@ -77,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
 
         RsGxsId gxsid;
         RsIdentityDetails details;
-        rsMsgs->getIdentityForChatLobby(id, gxsid);
+        rsChats->getIdentityForChatLobby(id, gxsid);
         for(int i=0;i<3;++i)
             if(rsIdentity->getIdDetails(gxsid,details))
                 break ;
@@ -86,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent, ChatId chatId, ChatWidget *chatWidget) :
         nick = details.mNickname;
 
         ChatLobbyInfo info;
-        rsMsgs->getChatLobbyInfo(id, info);
+        rsChats->getChatLobbyInfo(id, info);
         lobby = info.lobby_name;
 
         std::string label = nick + "@" + lobby;
@@ -134,13 +131,13 @@ uint32_t MainWindow::maxMessageSize()
     case ChatWidget::CHATTYPE_UNKNOWN:
         break;
     case ChatWidget::CHATTYPE_PRIVATE:
-        maxMessageSize = rsMsgs->getMaxMessageSecuritySize(RS_CHAT_TYPE_PRIVATE);
+        maxMessageSize = rsChats->getMaxMessageSecuritySize(RS_CHAT_TYPE_PRIVATE);
         break;
     case ChatWidget::CHATTYPE_LOBBY:
-        maxMessageSize = rsMsgs->getMaxMessageSecuritySize(RS_CHAT_TYPE_LOBBY);
+        maxMessageSize = rsChats->getMaxMessageSecuritySize(RS_CHAT_TYPE_LOBBY);
         break;
     case ChatWidget::CHATTYPE_DISTANT:
-        maxMessageSize = rsMsgs->getMaxMessageSecuritySize(RS_CHAT_TYPE_DISTANT);
+        maxMessageSize = rsChats->getMaxMessageSecuritySize(RS_CHAT_TYPE_DISTANT);
         break;
     }
     return maxMessageSize;
@@ -364,6 +361,6 @@ void MainWindow::on_actionSend_triggered()
     QString html;
     QImage opt;
     if(ImageUtil::optimizeSizeHtml(html, img, opt, -1, MAX_LOBBY_MSG_SIZE)){
-        rsMsgs->sendChat(ChatId(chatId), html.toUtf8().constData());
+        rsChats->sendChat(ChatId(chatId), html.toUtf8().constData());
     }
 }

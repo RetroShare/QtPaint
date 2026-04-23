@@ -47,6 +47,9 @@ public slots:
 
     void mouseRelease(const QPoint&, QImage*);
 
+signals:
+    void contentChanged();
+
 public:
     enum PaintLimits {
         MAX_PEN_WIDTH = 125,
