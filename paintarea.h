@@ -17,7 +17,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #ifndef PAINTAREA_H
 #define PAINTAREA_H
 
-#include <QOpenGLWidget>
 #include <QScrollArea>
 #include <QPen>
 #include <QVector>

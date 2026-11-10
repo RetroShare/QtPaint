@@ -49,7 +49,7 @@ void BrushTool::paintLine(PaintEvent* event)
 {
     QPainter painter(event->selectedLayer);
     if (event->antialiasingEnabled)
-        painter.setRenderHint(QPainter::HighQualityAntialiasing);
+        painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(event->pen);
     painter.drawLine(event->previousPoint, event->currentPoint);
 }
@@ -58,7 +58,7 @@ void BrushTool::paintPoint(PaintEvent* event)
 {
     QPainter painter(event->selectedLayer);
     if (event->antialiasingEnabled)
-        painter.setRenderHint(QPainter::HighQualityAntialiasing);
+        painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(event->pen);
     painter.drawPoint(event->currentPoint);
 }
