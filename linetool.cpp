@@ -59,7 +59,7 @@ void LineTool::paint(PaintEvent* event, bool temporary)
     }
     QPainter painter(device);
     if (event->antialiasingEnabled)
-        painter.setRenderHint(QPainter::HighQualityAntialiasing);
+        painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(event->pen);
     painter.drawLine(m_originPoint, event->currentPoint);
 }
